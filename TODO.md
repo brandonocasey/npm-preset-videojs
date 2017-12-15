@@ -1,3 +1,7 @@
+## Must do
+* update to use npms rather than npm
+* use regex matches for scripts where possible (build:* etc)
+
 ## Stretch Goals
 * watch docs
 * watch lang
