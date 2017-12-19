@@ -7,6 +7,7 @@ import npmRun from 'npm-run';
 import Promise from 'bluebird';
 import chokidar from 'chokidar';
 
+const TIMEOUT = 30 * 1000;
 const fixtureDir = path.join(__dirname, '..', 'fixtures');
 const npmPresetDir = path.join(__dirname, '..', '..');
 const testPkgDir = path.join(fixtureDir, 'test-pkg-main');
@@ -123,6 +124,13 @@ test('docs', (t) => {
   });
 });
 
+test('test:run', (t) => {
+  t.plan(1);
+  return promiseSpawn('npms', ['test:run'], {cwd: t.context.dir}).then((result) => {
+    t.is(result.exitCode, 0, 'tests run and pass');
+  });
+});
+
 test('lint', (t) => {
   t.plan(2);
   return promiseSpawn('npms', ['lint'], {cwd: t.context.dir, ignoreExitCode: true}).then((result) => {
@@ -211,7 +219,7 @@ test.cb('watch:js-modules', (t) => {
   t.context.timeout = setTimeout(() => {
     t.fail('timeout');
     t.end();
-  }, 5000);
+  }, TIMEOUT);
 });
 
 test.cb('watch:js-umd', (t) => {
@@ -254,7 +262,7 @@ test.cb('watch:js-umd', (t) => {
   t.context.timeout = setTimeout(() => {
     t.fail('timeout');
     t.end();
-  }, 5000);
+  }, TIMEOUT);
 });
 
 test.cb('watch:test', (t) => {
@@ -297,7 +305,7 @@ test.cb('watch:test', (t) => {
   t.context.timeout = setTimeout(() => {
     t.fail('timeout');
     t.end();
-  }, 5000);
+  }, TIMEOUT);
 
 });
 
@@ -341,6 +349,6 @@ test.cb('watch:css', (t) => {
   t.context.timeout = setTimeout(() => {
     t.fail('timeout');
     t.end();
-  }, 5000);
+  }, TIMEOUT);
 
 });
