@@ -7,8 +7,8 @@
 import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import resolve from 'rollup-plugin-node-resolve';
-import config from 'npm-script/src/config';
 import babel from './shared-babel';
+const config = JSON.parse(process.env.NPM_SCRIPT_CONFIG);
 
 export default {
   name: config.moduleName,

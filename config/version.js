@@ -1,7 +1,7 @@
 const execSync = require('child_process').execSync;
 const semver = require('semver');
 const pkg = require('../package.json');
-const config = require('npm-script/src/config');
+const config = require('../src/npm-script-config.js');
 
 if (!semver.prerelease(pkg.version)) {
   process.chdir(config.root);

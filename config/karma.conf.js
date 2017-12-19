@@ -1,4 +1,4 @@
-var config = require('npm-script/src/config');
+var config = JSON.parse(process.env.NPM_SCRIPT_CONFIG);
 
 module.exports = function(karmaConfig) {
   var detectBrowsers = {

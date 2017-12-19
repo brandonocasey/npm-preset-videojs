@@ -3,7 +3,6 @@ var es3 = require('babel-preset-es3');
 var es2015 = require('babel-preset-es2015');
 var externalHelpers = require('babel-plugin-external-helpers');
 var transformObjectAssign = require('babel-plugin-transform-object-assign');
-var config = require('npm-script/src/config');
 
 export default function(options) {
   return babel(Object.assign({

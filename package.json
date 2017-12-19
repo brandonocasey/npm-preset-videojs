@@ -19,7 +19,6 @@
     ]
   },
   "dependencies": {
-    "npm-script": "*",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-transform-object-assign": "^6.8.0",
     "babel-preset-es2015": "^6.14.0",
@@ -62,6 +61,7 @@
     "es5-shim": "^4.5.9",
     "global": "^4.3.2",
     "npm-run": "^4.1.2",
+    "npm-script": "*",
     "qunitjs": "^1.23.1",
     "shelljs": "^0.7.8",
     "sinon": "^2.4.1",
