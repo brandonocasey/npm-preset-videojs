@@ -7,7 +7,6 @@ import npmRun from 'npm-run';
 import Promise from 'bluebird';
 import chokidar from 'chokidar';
 
-const TIMEOUT = 30 * 1000;
 const fixtureDir = path.join(__dirname, '..', 'fixtures');
 const npmPresetDir = path.join(__dirname, '..', '..');
 const testPkgDir = path.join(fixtureDir, 'test-pkg-main');
@@ -70,9 +69,6 @@ test.beforeEach((t) => {
 });
 
 test.afterEach.always((t) => {
-  if (t.context.timeout) {
-    clearTimeout(t.context.timeout);
-  }
   if (t.context.watcher) {
     t.context.watcher.close();
   }
@@ -215,11 +211,6 @@ test.cb('watch:js-modules', (t) => {
     t.fail('watcher died');
     t.end();
   });
-
-  t.context.timeout = setTimeout(() => {
-    t.fail('timeout');
-    t.end();
-  }, TIMEOUT);
 });
 
 test.cb('watch:js-umd', (t) => {
@@ -259,10 +250,6 @@ test.cb('watch:js-umd', (t) => {
     t.end();
   });
 
-  t.context.timeout = setTimeout(() => {
-    t.fail('timeout');
-    t.end();
-  }, TIMEOUT);
 });
 
 test.cb('watch:test', (t) => {
@@ -302,11 +289,6 @@ test.cb('watch:test', (t) => {
     t.end();
   });
 
-  t.context.timeout = setTimeout(() => {
-    t.fail('timeout');
-    t.end();
-  }, TIMEOUT);
-
 });
 
 test.cb('watch:css', (t) => {
@@ -321,9 +303,13 @@ test.cb('watch:css', (t) => {
       t.log(e);
       adds.push(e);
 
-      if (adds.length === 1) {
+      if (adds.length >= 1) {
         t.not(adds.indexOf(path.join(t.context.dir, 'dist', 'test-pkg-main.css')), -1, 'css file created');
-        fs.appendFileSync(path.join(t.context.dir, 'src', 'plugin.scss'), ' ');
+
+        // give watch 1s to start
+        setTimeout(() => {
+          fs.appendFileSync(path.join(t.context.dir, 'src', 'plugin.scss'), ' ');
+        }, 1000);
       }
     })
     .on('addDir', (e) => t.fail(`a dir ${e} was created unexpectedly`))
@@ -345,10 +331,5 @@ test.cb('watch:css', (t) => {
     t.fail('watcher died');
     t.end();
   });
-
-  t.context.timeout = setTimeout(() => {
-    t.fail('timeout');
-    t.end();
-  }, TIMEOUT);
 
 });

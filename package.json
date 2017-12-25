@@ -11,6 +11,7 @@
     "test": "ava test/unit/*.test.js"
   },
   "ava": {
+    "timeout": "15s",
     "require": "babel-register"
   },
   "babel": {
