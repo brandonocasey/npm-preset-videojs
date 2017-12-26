@@ -306,10 +306,10 @@ test.cb('watch:css', (t) => {
       if (adds.length >= 1) {
         t.not(adds.indexOf(path.join(t.context.dir, 'dist', 'test-pkg-main.css')), -1, 'css file created');
 
-        // give watch 1s to start
+        // give watch 3s to start
         setTimeout(() => {
           fs.appendFileSync(path.join(t.context.dir, 'src', 'plugin.scss'), ' ');
-        }, 1000);
+        }, 3000);
       }
     })
     .on('addDir', (e) => t.fail(`a dir ${e} was created unexpectedly`))
