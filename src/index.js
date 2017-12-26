@@ -36,9 +36,7 @@ var getScripts = function(config) {
     'watch': 'npms -p watch:js-modules watch:js-umd watch:test',
     'watch:js-modules': 'rollup -c ' + buildConfigs['modules.rollup.config.js'] + ' -w',
     'watch:js-umd': 'rollup -c ' + buildConfigs['umd.rollup.config.js'] + ' -w',
-    'watch:test': 'rollup -c ' + buildConfigs['test.rollup.config.js'] + ' -w',
-    'prepublishOnly': 'npms build',
-    'prepush': 'npms lint'
+    'watch:test': 'rollup -c ' + buildConfigs['test.rollup.config.js'] + ' -w'
   };
 
   if (vjsConfig.css) {
@@ -60,8 +58,7 @@ var getScripts = function(config) {
       'clean:docs': 'rimraf ' + path.join(config.root, 'docs', 'api'),
       'docs': 'npms -p docs:api docs:toc',
       'docs:api': 'jsdoc src -r -c ' + buildConfigs['jsdoc.json'] + ' -d ' + path.join(config.root, 'docs', 'api'),
-      'docs:toc': 'doctoc ' + path.join(config.root, 'README.md'),
-      'precommit': 'npms docs:toc && git add ' + path.join(config.root, 'README.md')
+      'docs:toc': 'doctoc ' + path.join(config.root, 'README.md')
     });
   }
 
