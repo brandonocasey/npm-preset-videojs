@@ -9,11 +9,9 @@ export default class TestingThing {
   }
 }
 
-const t = new TestingThing();
-console.log(t.foo());
+// const t = new TestingThing();
 
 // intentional double empty line to cause error
-
 
 // long comment to cause a warning in eslint
 // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

@@ -65,6 +65,15 @@ test.beforeEach((t) => {
 
   t.context.dir = tempdir;
 
+  t.context.modifyPkg = (newPkg) => {
+    return new Promise((resolve, reject) => {
+      const pkgPath = path.join(tempdir, 'package.json');
+      const oldPkg = require(pkgPath);
+
+      resolve(fs.writeFileSync(pkgPath, JSON.stringify(Object.assign(oldPkg, newPkg))));
+    });
+  };
+
   return promiseSpawn('cp', ['-R', testPkgDir + path.sep, tempdir], {});
 });
 
@@ -130,6 +139,16 @@ test('test:run', (t) => {
 test('lint', (t) => {
   t.plan(2);
   return promiseSpawn('npms', ['lint'], {cwd: t.context.dir, ignoreExitCode: true}).then((result) => {
+    t.is(result.exitCode, 0, 'success');
+    t.true(result.stdout.length > 0, 'printed to stdout');
+  });
+});
+
+test('lint fail', (t) => {
+  t.plan(2);
+  fs.appendFileSync(path.join(t.context.dir, 'src', 'plugin.js'), '\n\n\n\n');
+
+  return promiseSpawn('npms', ['lint'], {cwd: t.context.dir, ignoreExitCode: true}).then((result) => {
     t.not(result.exitCode, 0, 'did not succeed');
     t.true(result.stdout.length > 0, 'printed to stdout');
   });
@@ -169,6 +188,38 @@ test('mkdir', (t) => {
   }).then(() => {
     t.true(exists(path.join(t.context.dir, 'dist')), 'dist folder does not exist');
     t.true(exists(path.join(t.context.dir, 'test', 'dist')), 'test/dist folder does not exist');
+  });
+});
+
+/*
+test('start:server', (t) => {
+});*/
+
+test('version', (t) => {
+  t.plan(7);
+
+  return t.context.modifyPkg({scripts: {version: 'npms version'}}).then(() => {
+    return promiseSpawn('git', ['init'], {cwd: t.context.dir});
+  }).then((result) => {
+    t.is(result.exitCode, 0, 'success');
+    return promiseSpawn('git', ['add', '--all'], {cwd: t.context.dir});
+  }).then((result) => {
+    t.is(result.exitCode, 0, 'success');
+    return promiseSpawn('git', ['commit', '-a', '-m', 'initial'], {cwd: t.context.dir});
+  }).then((result) => {
+    t.is(result.exitCode, 0, 'success');
+    return promiseSpawn('npm', ['version', 'major'], {cwd: t.context.dir});
+  }).then((result) => {
+    t.is(result.exitCode, 0, 'success');
+    return promiseSpawn('git', ['diff', 'HEAD~1', '--name-only'], {cwd: t.context.dir});
+  }).then((result) => {
+    const stdouts = result.stdout.trim().split('\n');
+    // package.json is cached in npm so we read the actual file
+    const pkg = JSON.parse(fs.readFileSync(path.join(t.context.dir, 'package.json')));
+
+    t.is(result.exitCode, 0, 'success');
+    t.deepEqual(stdouts, ['CHANGELOG.md', 'package-lock.json', 'package.json'], 'package changed');
+    t.is(pkg.version, '2.0.0', 'package version incremented');
   });
 });
 

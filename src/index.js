@@ -12,7 +12,7 @@ var getScripts = function(config) {
     docs: true,
     lang: true,
     ie8: false
-  }, config.npmScript.videojs || {});
+  }, config.npmScripts.videojs || {});
 
   var scripts = {
     'prebuild': 'npms clean',
@@ -27,11 +27,11 @@ var getScripts = function(config) {
     'mkdir': 'mkdirp ' + path.join(config.root, 'dist') + ' ' + path.join(config.root, 'test', 'dist'),
     'lint': 'vjsstandard',
     'start': 'npms -p start:server watch',
-    'start:server': 'static -a 0.0.0.0 -p 9999 -H \'{"Cache-Control": "no-cache, must-revalidate"}\' .',
+    'start:server': 'node ' + buildConfigs['server.js'],
     'test': 'npms test:run lint',
     'pretest:run': 'npms build',
     'test:run': 'karma start ' + buildConfigs['karma.conf.js'],
-    'preversion': 'npm test',
+    'preversion': 'npms test',
     'version': 'node ' + buildConfigs['version.js'],
     'watch': 'npms -p watch:js-modules watch:js-umd watch:test',
     'watch:js-modules': 'rollup -c ' + buildConfigs['modules.rollup.config.js'] + ' -w',

@@ -14,4 +14,3 @@
   * css minify
   * source maps?
 * Automatically change src/index.js based on available files. ex: don't have/run docs scripts if there are no docs etc
-* portscanning server

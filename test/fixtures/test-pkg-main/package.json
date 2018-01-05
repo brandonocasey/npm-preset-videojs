@@ -44,16 +44,11 @@
     "video.js": "^5.19.2"
   },
   "devDependencies": {
-    "npm-script": "*",
-    "npm-script-preset-videojs": "*",
+    "npm-scripts": "*",
+    "npm-scripts-preset-videojs": "*",
     "es5-shim": "^4.5.9",
     "husky": "^0.14.3",
     "qunitjs": "^2.4.1",
     "sinon": "^2.2.1"
-  },
-  "npm-script": {
-    "presets": [
-      "videojs"
-    ]
   }
 }
