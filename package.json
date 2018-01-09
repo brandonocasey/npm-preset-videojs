@@ -1,15 +1,24 @@
 {
   "name": "npm-preset-videojs",
   "version": "1.0.0",
-  "description": "",
+  "description": "An npm preset for videojs",
   "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brandonocasey/npm-preset-videojs.git"
+  },
   "keywords": [],
-  "author": "",
+  "author": "brandonocasey <brandonocasey@gmail.com>",
   "scripts": {
     "test:manual": "node test/scripts/setup.js",
     "test:clean": "node test/scripts/clean.js",
     "test": "ava test/unit/*.test.js"
   },
+  "files": [
+      "src/",
+      "test/",
+      "config/"
+    ],
   "ava": {
     "timeout": "30s",
     "require": "babel-register"
@@ -61,7 +70,7 @@
     "es5-shim": "^4.5.9",
     "global": "^4.3.2",
     "npm-run": "^4.1.2",
-    "npm-preset": "*",
+    "npm-preset": "^1.0.1",
     "qunitjs": "^1.23.1",
     "shelljs": "^0.7.8",
     "sinon": "^2.4.1",
