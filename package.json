@@ -1,6 +1,6 @@
 {
   "name": "npm-preset-videojs",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "An npm preset for videojs",
   "main": "src/index.js",
   "repository": {
