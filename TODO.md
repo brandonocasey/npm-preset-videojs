@@ -1,6 +1,7 @@
 ## Stretch Goals
 * watch docs
 * watch lang
+* css min
 * move the following over from spellbook:
   * optional livereload, default off
   * sb-build-docs-manual

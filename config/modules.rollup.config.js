@@ -7,7 +7,7 @@
  */
 import json from 'rollup-plugin-json';
 import babel from './shared-babel';
-const config = JSON.parse(process.env.NPM_SCRIPT_CONFIG);
+const config = JSON.parse(process.env.NPM_PRESET_CONFIG);
 
 export default {
   name: config.moduleName,

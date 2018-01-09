@@ -93,14 +93,14 @@ test.afterEach.always((t) => {
 
 test('build:css', (t) => {
   t.plan(1);
-  return promiseSpawn('npms', ['build:css'], {cwd: t.context.dir}).then(() => {
+  return promiseSpawn('npmp', ['build:css'], {cwd: t.context.dir}).then(() => {
     t.true(exists(path.join(t.context.dir, 'dist', 'test-pkg-main.css')), '.css file was built');
   });
 });
 
 test('build:js', (t) => {
   t.plan(4);
-  return promiseSpawn('npms', ['build:js'], {cwd: t.context.dir}).then(() => {
+  return promiseSpawn('npmp', ['build:js'], {cwd: t.context.dir}).then(() => {
     t.true(exists(path.join(t.context.dir, 'dist', 'test-pkg-main.js')), '.js file was built');
     t.true(exists(path.join(t.context.dir, 'dist', 'test-pkg-main.min.js')), '.min.js file was built');
     t.true(exists(path.join(t.context.dir, 'dist', 'test-pkg-main.es.js')), '.es.js file was built');
@@ -110,35 +110,35 @@ test('build:js', (t) => {
 
 test('build:test', (t) => {
   t.plan(1);
-  return promiseSpawn('npms', ['build:test'], {cwd: t.context.dir}).then(() => {
+  return promiseSpawn('npmp', ['build:test'], {cwd: t.context.dir}).then(() => {
     t.true(exists(path.join(t.context.dir, 'test', 'dist', 'bundle.js')), 'test bundle was built');
   });
 });
 
 test('build:lang', (t) => {
   t.plan(1);
-  return promiseSpawn('npms', ['build:lang'], {cwd: t.context.dir}).then(() => {
+  return promiseSpawn('npmp', ['build:lang'], {cwd: t.context.dir}).then(() => {
     t.true(exists(path.join(t.context.dir, 'dist', 'lang')), 'lang folder exists');
   });
 });
 
 test('docs', (t) => {
   t.plan(1);
-  return promiseSpawn('npms', ['docs'], {cwd: t.context.dir}).then(() => {
+  return promiseSpawn('npmp', ['docs'], {cwd: t.context.dir}).then(() => {
     t.true(exists(path.join(t.context.dir, 'docs', 'api', 'index.html')), 'api docs built');
   });
 });
 
 test('test:run', (t) => {
   t.plan(1);
-  return promiseSpawn('npms', ['test:run'], {cwd: t.context.dir}).then((result) => {
+  return promiseSpawn('npmp', ['test:run'], {cwd: t.context.dir}).then((result) => {
     t.is(result.exitCode, 0, 'tests run and pass');
   });
 });
 
 test('lint', (t) => {
   t.plan(2);
-  return promiseSpawn('npms', ['lint'], {cwd: t.context.dir, ignoreExitCode: true}).then((result) => {
+  return promiseSpawn('npmp', ['lint'], {cwd: t.context.dir, ignoreExitCode: true}).then((result) => {
     t.is(result.exitCode, 0, 'success');
     t.true(result.stdout.length > 0, 'printed to stdout');
   });
@@ -148,7 +148,7 @@ test('lint fail', (t) => {
   t.plan(2);
   fs.appendFileSync(path.join(t.context.dir, 'src', 'plugin.js'), '\n\n\n\n');
 
-  return promiseSpawn('npms', ['lint'], {cwd: t.context.dir, ignoreExitCode: true}).then((result) => {
+  return promiseSpawn('npmp', ['lint'], {cwd: t.context.dir, ignoreExitCode: true}).then((result) => {
     t.not(result.exitCode, 0, 'did not succeed');
     t.true(result.stdout.length > 0, 'printed to stdout');
   });
@@ -161,13 +161,13 @@ test('clean', (t) => {
   t.false(exists(path.join(t.context.dir, 'test', 'dist')), 'test/dist folder does not exist');
 
   // does not die when there is nothing to clean
-  return promiseSpawn('npms', ['clean'], {cwd: t.context.dir}).then(() => {
+  return promiseSpawn('npmp', ['clean'], {cwd: t.context.dir}).then(() => {
     t.false(exists(path.join(t.context.dir, 'dist')), 'dist folder does not exist');
     t.false(exists(path.join(t.context.dir, 'test', 'dist')), 'test/dist folder does not exist');
 
     shelljs.mkdir('-p', path.join(t.context.dir, 'test', 'dist'));
     shelljs.mkdir('-p', path.join(t.context.dir, 'dist'));
-    return promiseSpawn('npms', ['clean'], {cwd: t.context.dir});
+    return promiseSpawn('npmp', ['clean'], {cwd: t.context.dir});
   }).then(() => {
     // cleans
     t.false(exists(path.join(t.context.dir, 'dist')), 'dist folder does not exist');
@@ -181,10 +181,10 @@ test('mkdir', (t) => {
   t.false(exists(path.join(t.context.dir, 'dist')), 'dist folder does not exist');
   t.false(exists(path.join(t.context.dir, 'test', 'dist')), 'test/dist folder does not exist');
 
-  return promiseSpawn('npms', ['mkdir'], {cwd: t.context.dir}).then(() => {
+  return promiseSpawn('npmp', ['mkdir'], {cwd: t.context.dir}).then(() => {
     t.true(exists(path.join(t.context.dir, 'dist')), 'dist folder does not exist');
     t.true(exists(path.join(t.context.dir, 'test', 'dist')), 'test/dist folder does not exist');
-    return promiseSpawn('npms', ['mkdir'], {cwd: t.context.dir});
+    return promiseSpawn('npmp', ['mkdir'], {cwd: t.context.dir});
   }).then(() => {
     t.true(exists(path.join(t.context.dir, 'dist')), 'dist folder does not exist');
     t.true(exists(path.join(t.context.dir, 'test', 'dist')), 'test/dist folder does not exist');
@@ -198,7 +198,7 @@ test('start:server', (t) => {
 test('version', (t) => {
   t.plan(7);
 
-  return t.context.modifyPkg({scripts: {version: 'npms version'}}).then(() => {
+  return t.context.modifyPkg({scripts: {version: 'npmp version'}}).then(() => {
     return promiseSpawn('git', ['init'], {cwd: t.context.dir});
   }).then((result) => {
     t.is(result.exitCode, 0, 'success');
@@ -223,7 +223,7 @@ test('version', (t) => {
   });
 });
 
-test.cb('watch:js-modules', (t) => {
+test.cb('watch:js:modules', (t) => {
   const adds = [];
   const changes = [];
 
@@ -256,7 +256,7 @@ test.cb('watch:js-modules', (t) => {
     .on('unlink', (e) => t.fail(`a file ${e} was deleted unexpectedly`))
     .on('unlinkDir', (e) => t.fail(`a dir ${e} was deleted unexpectedly`));
 
-  t.context.child = npmRun.spawn('npms', ['watch:js-modules'], {cwd: t.context.dir});
+  t.context.child = npmRun.spawn('npmp', ['watch:js:modules'], {cwd: t.context.dir});
 
   t.context.child.on('close', (exitCode) => {
     t.fail('watcher died');
@@ -264,7 +264,7 @@ test.cb('watch:js-modules', (t) => {
   });
 });
 
-test.cb('watch:js-umd', (t) => {
+test.cb('watch:js:umd', (t) => {
   const adds = [];
   const changes = [];
 
@@ -294,7 +294,7 @@ test.cb('watch:js-umd', (t) => {
     .on('unlink', (e) => t.fail(`a file ${e} was deleted unexpectedly`))
     .on('unlinkDir', (e) => t.fail(`a dir ${e} was deleted unexpectedly`));
 
-  t.context.child = npmRun.spawn('npms', ['watch:js-umd'], {cwd: t.context.dir});
+  t.context.child = npmRun.spawn('npmp', ['watch:js:umd'], {cwd: t.context.dir});
 
   t.context.child.on('close', (exitCode) => {
     t.fail('watcher died');
@@ -333,7 +333,7 @@ test.cb('watch:test', (t) => {
     .on('unlink', (e) => t.fail(`a file ${e} was deleted unexpectedly`))
     .on('unlinkDir', (e) => t.fail(`a dir ${e} was deleted unexpectedly`));
 
-  t.context.child = npmRun.spawn('npms', ['watch:test'], {cwd: t.context.dir});
+  t.context.child = npmRun.spawn('npmp', ['watch:test'], {cwd: t.context.dir});
 
   t.context.child.on('close', (exitCode) => {
     t.fail('watcher died');
@@ -376,7 +376,7 @@ test.cb('watch:css', (t) => {
     .on('unlink', (e) => t.fail(`a file ${e} was deleted unexpectedly`))
     .on('unlinkDir', (e) => t.fail(`a dir ${e} was deleted unexpectedly`));
 
-  t.context.child = npmRun.spawn('npms', ['watch:css'], {cwd: t.context.dir});
+  t.context.child = npmRun.spawn('npmp', ['watch:css'], {cwd: t.context.dir});
 
   t.context.child.on('close', (exitCode) => {
     t.fail('watcher died');

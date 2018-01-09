@@ -1,5 +1,5 @@
 {
-  "name": "npm-scripts-preset-videojs",
+  "name": "npm-preset-videojs",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
@@ -40,7 +40,6 @@
     "mkdirp": "^0.5.1",
     "node-sass": "4.5.3",
     "node-static": "^0.7.9",
-    "npm-run-all": "^4.0.2",
     "rimraf": "^2.6.1",
     "rollup": "^0.50.0",
     "rollup-plugin-babel": "^2.7.1",
@@ -62,7 +61,7 @@
     "es5-shim": "^4.5.9",
     "global": "^4.3.2",
     "npm-run": "^4.1.2",
-    "npm-scripts": "*",
+    "npm-preset": "*",
     "qunitjs": "^1.23.1",
     "shelljs": "^0.7.8",
     "sinon": "^2.4.1",

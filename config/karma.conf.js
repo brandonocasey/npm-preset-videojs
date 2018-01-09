@@ -1,4 +1,4 @@
-var config = JSON.parse(process.env.NPM_SCRIPT_CONFIG);
+var config = JSON.parse(process.env.NPM_PRESET_CONFIG);
 
 module.exports = function(karmaConfig) {
   var detectBrowsers = {

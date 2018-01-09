@@ -8,7 +8,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import multiEntry from 'rollup-plugin-multi-entry';
 import resolve from 'rollup-plugin-node-resolve';
-const config = JSON.parse(process.env.NPM_SCRIPT_CONFIG);
+const config = JSON.parse(process.env.NPM_PRESET_CONFIG);
 
 export default {
   name: `${config.moduleName}Tests`,

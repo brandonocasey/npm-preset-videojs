@@ -7,17 +7,17 @@
   "author": "Brandon 'Casey <someemail@lol.com> (http://foo.bar.com)",
   "license": "MIT",
   "scripts": {
-    "build": "npms build",
-    "clean": "npms clean",
-    "docs": "npms docs",
-    "lint": "npms lint",
-    "start": "npms start",
-    "test": "npms test",
-    "version": "npms version",
-    "watch": "npms watch",
-    "prepublishOnly": "npms build",
-    "prepush": "npms lint",
-    "precommit": "npms precommit"
+    "build": "npmp build",
+    "clean": "npmp clean",
+    "docs": "npmp docs",
+    "lint": "npmp lint",
+    "start": "npmp start",
+    "test": "npmp test",
+    "version": "npmp version",
+    "watch": "npmp watch",
+    "prepublishOnly": "npmp build",
+    "prepush": "npmp lint",
+    "precommit": "npmp precommit"
   },
   "keywords": [
     "videojs",
@@ -44,8 +44,8 @@
     "video.js": "^5.19.2"
   },
   "devDependencies": {
-    "npm-scripts": "*",
-    "npm-scripts-preset-videojs": "*",
+    "npm-preset": "*",
+    "npm-preset-videojs": "*",
     "es5-shim": "^4.5.9",
     "husky": "^0.14.3",
     "qunitjs": "^2.4.1",
