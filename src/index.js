@@ -64,7 +64,8 @@ var getScripts = function(config) {
 
   if (vjsConfig.lang) {
     Object.assign(scripts, {
-      'build:lang': 'vjslang --dir ' + path.join(config.root, 'dist', 'lang')
+      'build:lang': 'vjslang --dir ' + path.join(config.root, 'dist', 'lang'),
+      'build': scripts.build + ' build:lang'
     });
   }
 
