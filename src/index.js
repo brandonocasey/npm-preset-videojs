@@ -1,13 +1,9 @@
 const path = require('path');
 const buildConfigs = require('./build-configs');
+const defaults = require('./defaults');
 
 const getScripts = function(config) {
-  const vjsConfig = Object.assign({
-    css: true,
-    docs: true,
-    lang: true,
-    ie8: false
-  }, config.npmScripts.videojs || {});
+  const vjsConfig = Object.assign(defaults, config.npmPreset.videojs || {});
 
   const scripts = {
     'prebuild': 'npmp clean',

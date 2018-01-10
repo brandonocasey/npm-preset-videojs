@@ -1,11 +1,11 @@
-import test from 'ava';
-import path from 'path';
-import uuid from 'uuid';
-import fs from 'fs';
-import shelljs from 'shelljs';
-import npmRun from 'npm-run';
-import Promise from 'bluebird';
-import chokidar from 'chokidar';
+const test = require('ava');
+const path = require('path');
+const uuid = require('uuid');
+const fs = require('fs');
+const shelljs = require('shelljs');
+const childProcess = require('child_process');
+const Promise = require('bluebird');
+const chokidar = require('chokidar');
 
 const fixtureDir = path.join(__dirname, '..', 'fixtures');
 const npmPresetDir = path.join(__dirname, '..', '..');
@@ -13,7 +13,7 @@ const testPkgDir = path.join(fixtureDir, 'test-pkg-main');
 
 const promiseSpawn = function(bin, args, options = {}) {
   return new Promise((resolve, reject) => {
-    const child = npmRun.spawn(bin, args, options);
+    const child = childProcess.spawn(bin, args, options);
     let stdout = '';
     let stderr = '';
     let out = '';
@@ -256,7 +256,7 @@ test.cb('watch:js:modules', (t) => {
     .on('unlink', (e) => t.fail(`a file ${e} was deleted unexpectedly`))
     .on('unlinkDir', (e) => t.fail(`a dir ${e} was deleted unexpectedly`));
 
-  t.context.child = npmRun.spawn('npmp', ['watch:js:modules'], {cwd: t.context.dir});
+  t.context.child = childProcess.spawn('npmp', ['watch:js:modules'], {cwd: t.context.dir});
 
   t.context.child.on('close', (exitCode) => {
     t.fail('watcher died');
@@ -294,7 +294,7 @@ test.cb('watch:js:umd', (t) => {
     .on('unlink', (e) => t.fail(`a file ${e} was deleted unexpectedly`))
     .on('unlinkDir', (e) => t.fail(`a dir ${e} was deleted unexpectedly`));
 
-  t.context.child = npmRun.spawn('npmp', ['watch:js:umd'], {cwd: t.context.dir});
+  t.context.child = childProcess.spawn('npmp', ['watch:js:umd'], {cwd: t.context.dir});
 
   t.context.child.on('close', (exitCode) => {
     t.fail('watcher died');
@@ -333,7 +333,7 @@ test.cb('watch:test', (t) => {
     .on('unlink', (e) => t.fail(`a file ${e} was deleted unexpectedly`))
     .on('unlinkDir', (e) => t.fail(`a dir ${e} was deleted unexpectedly`));
 
-  t.context.child = npmRun.spawn('npmp', ['watch:test'], {cwd: t.context.dir});
+  t.context.child = childProcess.spawn('npmp', ['watch:test'], {cwd: t.context.dir});
 
   t.context.child.on('close', (exitCode) => {
     t.fail('watcher died');
@@ -376,7 +376,7 @@ test.cb('watch:css', (t) => {
     .on('unlink', (e) => t.fail(`a file ${e} was deleted unexpectedly`))
     .on('unlinkDir', (e) => t.fail(`a dir ${e} was deleted unexpectedly`));
 
-  t.context.child = npmRun.spawn('npmp', ['watch:css'], {cwd: t.context.dir});
+  t.context.child = childProcess.spawn('npmp', ['watch:css'], {cwd: t.context.dir});
 
   t.context.child.on('close', (exitCode) => {
     t.fail('watcher died');

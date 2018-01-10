@@ -1,3 +1,6 @@
+## Must do
+* support options
+
 ## Stretch Goals
 * watch docs
 * watch lang
