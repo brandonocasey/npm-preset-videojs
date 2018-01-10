@@ -23,7 +23,6 @@ module.exports = function(karmaConfig) {
     files: [
       'node_modules/video.js/dist/video-js.css',
       'dist/' + config.name + '.css',
-      'node_modules/es5-shim/es5-shim.js',
       'node_modules/sinon/pkg/sinon.js',
       'node_modules/video.js/dist/video.js',
       'test/dist/bundle.js'
