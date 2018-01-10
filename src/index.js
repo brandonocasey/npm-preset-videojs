@@ -1,10 +1,8 @@
 var path = require('path');
-var glob = require('glob');
-var buildConfigs = {};
+var buildConfigs = require('./build-configs');
 
-glob.sync(path.join(__dirname, '..', 'config', '*')).forEach(function(filepath) {
-  buildConfigs[path.basename(filepath)] = filepath;
-});
+
+
 
 var getScripts = function(config) {
   var vjsConfig = Object.assign({
