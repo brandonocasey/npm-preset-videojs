@@ -1,22 +1,19 @@
-var path = require('path');
-var buildConfigs = require('./build-configs');
+const path = require('path');
+const buildConfigs = require('./build-configs');
 
-
-
-
-var getScripts = function(config) {
-  var vjsConfig = Object.assign({
+const getScripts = function(config) {
+  const vjsConfig = Object.assign({
     css: true,
     docs: true,
     lang: true,
     ie8: false
   }, config.npmScripts.videojs || {});
 
-  var scripts = {
+  const scripts = {
     'prebuild': 'npmp clean',
     'build': 'npmp -p build:*',
     'build:js': 'npmp -p build:js:rollup-modules -s build:js:rollup-umd build:js:bannerize build:js:uglify',
-    'build:js:bannerize': 'bannerize ' + path.join(config.root, 'dist',  config.name + '.js ') + '--banner=' + buildConfigs['banner.ejs'],
+    'build:js:bannerize': 'bannerize ' + path.join(config.root, 'dist', config.name + '.js ') + '--banner=' + buildConfigs['banner.ejs'],
     'build:js:rollup-modules': 'rollup -c ' + buildConfigs['modules.rollup.config.js'],
     'build:js:rollup-umd': 'rollup -c ' + buildConfigs['umd.rollup.config.js'],
     'build:js:uglify': 'uglifyjs dist/' + config.name + '.js --comments --mangle --compress --ie8 -o dist/' + config.name + '.min.js',
@@ -45,7 +42,7 @@ var getScripts = function(config) {
       'build:css:sass': 'node-sass ' + path.join(config.root, 'src', 'plugin.scss') + ' ' + path.join(config.root, 'dist', config.name + '.css') + ' --output-style=compressed --linefeed=lf',
       // we run npm run build:css:sass here for intial rebuild
       'watch:css': 'npmp -p watch:css:sass build:css:sass',
-      'watch:css:sass': 'npmp build:css:sass -- --watch src/**/*.scss',
+      'watch:css:sass': 'npmp build:css:sass -- --watch src/**/*.scss'
     });
   }
 
@@ -61,7 +58,7 @@ var getScripts = function(config) {
 
   if (vjsConfig.lang) {
     Object.assign(scripts, {
-      'build:lang': 'vjslang --dir ' + path.join(config.root, 'dist', 'lang'),
+      'build:lang': 'vjslang --dir ' + path.join(config.root, 'dist', 'lang')
     });
   }
 
