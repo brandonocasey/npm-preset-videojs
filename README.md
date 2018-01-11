@@ -1,4 +1,6 @@
 # npm-preset-videojs
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/BrandonOCasey/npm-preset-videojs.svg)](https://greenkeeper.io/)
 An npm-preset for videojs
 
 [![Build Status][travis-icon]][travis-link]
