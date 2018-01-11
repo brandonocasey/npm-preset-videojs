@@ -28,7 +28,6 @@ export default {
   globals: {
     'video.js': 'videojs'
   },
-  legacy: true,
   plugins: [
     json(),
     babel()

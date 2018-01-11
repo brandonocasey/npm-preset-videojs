@@ -9,7 +9,6 @@ export default function(options) {
     babelrc: false,
     exclude: 'node_modules/**',
     presets: [
-      es3,
       es2015.buildPreset(null, {loose: true, modules: false})
     ],
     plugins: [

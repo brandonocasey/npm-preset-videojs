@@ -8,7 +8,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import resolve from 'rollup-plugin-node-resolve';
 import babel from './shared-babel';
-const config = JSON.parse(process.env.NPM_PRESET_CONFIG);
+const config = require('../src/config');
 
 export default {
   name: config.moduleName,
@@ -23,7 +23,6 @@ export default {
   globals: {
     'video.js': 'videojs'
   },
-  legacy: true,
   plugins: [
     resolve({
       browser: true,

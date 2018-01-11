@@ -12,7 +12,7 @@ const getScripts = function(config) {
     'build:js:bannerize': 'bannerize ' + path.join(config.root, 'dist', config.name + '.js ') + '--banner=' + buildConfigs['banner.ejs'],
     'build:js:rollup-modules': 'rollup -c ' + buildConfigs['modules.rollup.config.js'],
     'build:js:rollup-umd': 'rollup -c ' + buildConfigs['umd.rollup.config.js'],
-    'build:js:uglify': 'uglifyjs dist/' + config.name + '.js --comments --mangle --compress --ie8 -o dist/' + config.name + '.min.js',
+    'build:js:uglify': 'uglifyjs dist/' + config.name + '.js --comments --mangle --compress -o dist/' + config.name + '.min.js',
     'build:test': 'rollup -c ' + buildConfigs['test.rollup.config.js'],
     'clean': 'rimraf ' + path.join(config.root, 'dist') + ' ' + path.join(config.root, 'test', 'dist'),
     'mkdir': 'mkdirp ' + path.join(config.root, 'dist') + ' ' + path.join(config.root, 'test', 'dist'),
