@@ -2,6 +2,7 @@
 An npm-preset for videojs
 
 [![Build Status][travis-icon]][travis-link]
+[![Coverage Status][coveralls-icon]][coveralls-link]
 
 [![NPM][npm-icon]][npm-link]
 
@@ -10,3 +11,6 @@ An npm-preset for videojs
 
 [npm-icon]: https://nodei.co/npm/npm-preset-videojs.png?downloads=true&downloadRank=true
 [npm-link]: https://nodei.co/npm/npm-preset-videojs/
+
+[coveralls-icon]: https://coveralls.io/repos/github/BrandonOCasey/npm-preset-videojs/badge.svg?branch=master
+[coveralls-link]: https://coveralls.io/github/BrandonOCasey/npm-preset-videojs?branch=master
