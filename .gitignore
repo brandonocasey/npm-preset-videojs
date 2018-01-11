@@ -32,7 +32,10 @@ node_modules/
 dist/
 docs/api/
 test/dist/
-
 test/fixtures/test-pkg-main/docs/api
 test/fixtures/test-pkg-main/dist
 test/fixtures/test-pkg-main/test/dist
+
+# code coverage
+coverage/
+.nyc_output

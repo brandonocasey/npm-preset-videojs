@@ -1,7 +1,7 @@
-var shelljs = require('shelljs');
-var path = require('path');
-var npmPresetDir = path.join(__dirname, '..', '..');
-var testPkgDir = path.join(npmPresetDir, 'test', 'fixtures', 'test-pkg-main');
+const shelljs = require('shelljs');
+const path = require('path');
+const npmPresetDir = path.join(__dirname, '..', '..');
+const testPkgDir = path.join(npmPresetDir, 'test', 'fixtures', 'test-pkg-main');
 
 shelljs.ln('-sf', path.join(npmPresetDir, 'node_modules'), path.join(testPkgDir, 'node_modules'));
 shelljs.ln('-sf', path.join(npmPresetDir), path.join(testPkgDir, 'node_modules', 'npm-preset-videojs'));
