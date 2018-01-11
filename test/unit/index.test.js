@@ -360,7 +360,7 @@ test.cb('watch:css', (t) => {
         // give watch 3s to start
         setTimeout(() => {
           fs.appendFileSync(path.join(t.context.dir, 'src', 'plugin.scss'), ' ');
-        }, 7000);
+        }, (process.env.TRAVIS ? 15000 : 3000));
       }
     })
     .on('addDir', (e) => t.fail(`a dir ${e} was created unexpectedly`))

@@ -1,5 +1,4 @@
 sudo: false
-dist: trusty
 language: node_js
 node_js: 'lts/*'
 
@@ -14,3 +13,7 @@ after_script: greenkeeper-lockfile-upload
 
 after_success:
   - nyc report --reporter=text-lcov | coveralls
+
+cache:
+  directories:
+    - node_modules
