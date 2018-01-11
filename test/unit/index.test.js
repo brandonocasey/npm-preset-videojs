@@ -345,6 +345,7 @@ test.cb('watch:test', (t) => {
 test.cb('watch:css', (t) => {
   const adds = [];
   const changes = [];
+  let timeout;
 
   t.plan(2);
 
@@ -358,7 +359,7 @@ test.cb('watch:css', (t) => {
         t.not(adds.indexOf(path.join(t.context.dir, 'dist', 'test-pkg-main.css')), -1, 'css file created');
 
         // give watch 3s to start
-        setTimeout(() => {
+        timeout = setTimeout(() => {
           fs.appendFileSync(path.join(t.context.dir, 'src', 'plugin.scss'), ' ');
         }, (process.env.TRAVIS ? 15000 : 3000));
       }
@@ -367,6 +368,10 @@ test.cb('watch:css', (t) => {
     .on('change', (e) => {
       t.log(e);
       changes.push(e);
+
+      if (timeout) {
+        clearTimeout(timeout);
+      }
 
       if (changes.length === 1) {
         t.not(changes.indexOf(path.join(t.context.dir, 'dist', 'test-pkg-main.css')), -1, 'css file changed');
